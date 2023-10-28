@@ -1,6 +1,7 @@
 const express = require("express");
 const { Client } = require("pg");
 const app = express();
+app.use(express.json());
 const PORT = 3000;
 
 const client = new Client({
@@ -16,7 +17,7 @@ client.connect((err) => {
   }
 });
 
-// Serve static files from the "public" directory
+// Serve static files from the root directory
 app.use(express.static(__dirname));
 
 // Fetch data endpoint
