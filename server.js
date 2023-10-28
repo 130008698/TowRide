@@ -21,7 +21,7 @@ client.connect((err) => {
 app.use(express.static(__dirname));
 
 // Fetch data endpoint
-app.get("/fetch_data", (req, res) => {
+app.get("/fetch-data", (req, res) => {
   client.query("SELECT * FROM menu", (err, dbResult) => {
     if (err) {
       res.status(500).send("Error fetching data");
