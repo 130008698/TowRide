@@ -16,8 +16,8 @@ client.connect((err) => {
   }
 });
 
-// Serve static files from the root directory
-app.use(express.static(__dirname));
+// Serve static files from the "public" directory
+app.use(express.static(__dirname + "/public"));
 
 // Fetch data endpoint
 app.get("/fetch-data", (req, res) => {
@@ -30,6 +30,11 @@ app.get("/fetch-data", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server started on http://localhost:${PORT}`);
+// Handle 404 - Keep this as the last route
+app.use((req, res, next) => {
+  res.status(404).send("Sorry, page not found!");
+});
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server started on http://0.0.0.0:${PORT}`);
 });
