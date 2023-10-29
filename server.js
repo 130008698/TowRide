@@ -21,15 +21,6 @@ client.connect((err) => {
 app.use(express.static(__dirname));
 
 // Fetch data endpoint
-app.get("/fetch_data", (req, res) => {
-  client.query("SELECT * FROM menu", (err, dbResult) => {
-    if (err) {
-      res.status(500).send("Error fetching data");
-      return;
-    }
-    res.json(dbResult.rows);
-  });
-});
 
 //Equal to get_table in Backend.java
 app.get("/get_table", async (req, res) => {
@@ -40,28 +31,14 @@ app.get("/get_table", async (req, res) => {
     return res.status(400).json({ error: "Name parameter is required." });
   }
 
-  try {
-    const result = await client.query(query);
-
-    let output = "";
-    const columnCount = result.fields.length;
-    for (let i = 0; i < columnCount; i++) {
-      output += result.fields[i].name + "\t";
+  let query = `SELECT * FROM "${name}" ORDER BY 1`;
+  client.query(query, (err, result) => {
+    if (err) {
+      res.status(500).send("Error fetching data");
+      return;
     }
-    output += "\n";
-
-    for (let row of result.rows) {
-      for (let i = 0; i < columnCount; i++) {
-        output += row[result.fields[i].name] + "\t";
-      }
-      output += "\n";
-    }
-
-    res.send(output);
-  } catch (error) {
-    console.error("Error in get table:", error);
-    res.status(500).json({ error: "Internal server error." });
-  }
+    res.json(result.rows);
+  });
 });
 
 //Equal to check_menu in Backend.java
@@ -73,20 +50,18 @@ app.get("/check_menu", async (req, res) => {
     return res.status(400).json({ error: "Name parameter is required." });
   }
 
-  try {
-    const result = await client.query("SELECT * FROM menu WHERE name = $1", [
-      name,
-    ]);
-    // Check if there are any rows returned by the query
+  let query = `SELECT * FROM menu WHERE name = '${name}'`;
+  client.query(query, (err, result) => {
+    if (err) {
+      res.status(500).send("Error fetching data");
+      return;
+    }
     if (result.rows.length > 0) {
       res.json({ exists: true });
     } else {
       res.json({ exists: false });
     }
-  } catch (error) {
-    console.error("Error in check menu:", error);
-    res.status(500).json({ error: "Internal server error." });
-  }
+  });
 });
 
 // Handle 404 - Keep this as the last route

@@ -3,36 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TowRide - 安全送您回家</title>
+    <title>p3</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="indexscripts.js" defer></script>
   </head>
   <body>
-    <header>
-      <nav>
-        <a href="index.html" class="active">首页</a>
-        <a href="services.html">服务说明</a>
-        <a href="pricing.html">价格</a>
-        <a href="faq.html">常见问题</a>
-        <a href="contact.html">联系我们</a>
-      </nav>
-    </header>
     <main>
-      <section class="intro">
-        <h1>欢迎来到TowRide</h1>
-        <p>安全地送您和您的爱车回家</p>
-        <button id="bookNow">立即预约</button>
-        <button id="menu">menutable</button>
-        <div id="dataContainer"></div>
+      <input type="text" id="tableNameInput" placeholder="Enter table name" />
+      <button id="get_table">get_table</button>
+      <pre id="tableOutput"></pre>
 
-        <input type="text" id="tableNameInput" placeholder="Enter table name" />
-        <button id="fetchTableData">Fetch Table Data</button>
-
-        <pre id="tableOutput"></pre>
-      </section>
+      <input
+        type="text"
+        id="menuNameInput"
+        placeholder="Enter menu item name"
+      />
+      <button id="check_menu">check_menu</button>
+      <pre id="checkMenuOutput"></pre>
     </main>
-    <footer>
-      <p>&copy; 2023 TowRide. All rights reserved.</p>
-    </footer>
   </body>
 </html>
