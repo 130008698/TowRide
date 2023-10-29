@@ -20,7 +20,6 @@ client.connect((err) => {
 // Serve static files from the root directory
 app.use(express.static(__dirname));
 
-// Fetch data endpoint
 
 //Equal to get_table in Backend.java
 app.get("/get_table", async (req, res) => {
