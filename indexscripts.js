@@ -3,7 +3,7 @@ document.getElementById("bookNow").addEventListener("click", function () {
 });
 
 document.getElementById("menu").addEventListener("click", function () {
-  fetch("/fetch-data")
+  fetch("/fetch_data")
     .then((response) => response.json())
     .then((data) => {
       const dataContainer = document.getElementById("dataContainer");
